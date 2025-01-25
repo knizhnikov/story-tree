@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { Game, StoryBlock, StoryBlockType, StoryBlockOptions } from '@/game/game';
+import { Game, StoryBlock, StoryBlockType, StoryBlockOptions, StoryBlockText } from '@/game/game';
 import gameData from '@/game/game.json';
 
 
@@ -30,7 +30,7 @@ onUnmounted(() => {
 const game = new Game(gameData);
 
 // Храним текущий блок
-const currentBlock = ref<StoryBlock | null>(game.story[0]);
+const currentBlock = ref<StoryBlock | StoryBlockText | StoryBlockOptions | null>(game.story[0]);
 
 // Вычисляем фоновое изображение
 const backgroundImage = computed(() => currentBlock.value?.scene?.img || '/default-background.png');
@@ -71,7 +71,7 @@ console.log(game);
 
             <!-- Отображение текстового блока -->
             <div v-if="currentBlock?.type === StoryBlockType.text">
-                <h1>{{ currentBlock.header }}</h1>
+                <h1 v-if="(currentBlock as StoryBlockText).header">{{ (currentBlock as StoryBlockText).header }}</h1>
                 <p>{{ currentBlock.text }}</p>
                 <button v-if="currentBlock.next" class="btn btn-primary" @click="goToNextBlock(currentBlock.next)">
                     Далее
@@ -80,7 +80,6 @@ console.log(game);
 
             <!-- Отображение блока реплики -->
             <div v-if="currentBlock?.type === StoryBlockType.line">
-                <h1>{{ currentBlock.header }}</h1>
                 <p>{{ currentBlock.text }}</p>
                 <button v-if="currentBlock.next" class="btn btn-primary" @click="goToNextBlock(currentBlock.next)">
                     Далее

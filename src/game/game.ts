@@ -78,15 +78,15 @@ class Game {
     scenes: Scene[] = [];
     story: StoryBlock[] = [];
 
-    constructor(data: Partial<Game> = {}) {
+    constructor(data: any = {}) {
         // Преобразование массива персонажей
-        this.characters = (data.characters || []).map((char) => new Character(char));
+        this.characters = (data.characters || []).map((char: any) => new Character(char));
 
         // Преобразование массива сцен
-        this.scenes = (data.scenes || []).map((scene) => new Scene(scene));
+        this.scenes = (data.scenes || []).map((scene: any) => new Scene(scene));
 
         // Преобразование массива истории
-        this.story = (data.story || []).map((block) => {
+        this.story = (data.story || []).map((block: any) => {
             // Найти сцену по её id
             const scene = this.scenes.find((s) => s.id === block.scene);
 
@@ -98,7 +98,7 @@ class Game {
                 return new StoryBlockText({ ...block, scene, character });
             } else if (block.type === "options") {
                 const options = (block.options || []).map(
-                    (option) => new StoryBlockOption(option)
+                    (option: any) => new StoryBlockOption(option)
                 );
                 return new StoryBlockOptions({ ...block, scene, character, options });
             }
