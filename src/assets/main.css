@@ -1,0 +1,39 @@
+@import './base.css';
+
+#app {
+  height: 100vh;
+  max-width: 600px; 
+  margin: 0 auto;
+}
+
+.centered {
+  display: block;
+  margin:0 auto;
+}
+
+.btn {
+  min-width: 7.5rem;
+  padding: .75rem;
+
+  border-radius: .5rem;
+  border: none;
+}
+
+.btn.btn-primary {
+  color: #fff;
+  background-color: #70c300;
+
+  -webkit-box-shadow: 1px 3px 16px 4px rgba(189, 238, 62, 0.74) inset;
+  -moz-box-shadow: 1px 3px 16px 4px rgba(189, 238, 62, 0.74) inset;
+  box-shadow: 1px 3px 16px 4px rgba(189, 238, 62, 0.74) inset;
+}
+
+.btn.btn-option {
+  width: 100%;
+  padding: .75rem;
+
+  color: #fff;
+  background-color: #00000047;
+  border-radius: .5rem;
+  border: none;
+}
